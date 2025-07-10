@@ -9,6 +9,8 @@ from sklearn.neighbors import LocalOutlierFactor
 from sklearn.preprocessing import StandardScaler
 from sklearn.utils import Bunch
 
+from pyod.models.auto_encoder import AutoEncoder
+
         
 def list_all_file_name_in_folder(folder="../data_rapport"):
     return [os.path.join(folder, filename) for filename in os.listdir(folder) if filename.endswith(".csv")]
@@ -85,7 +87,26 @@ def run_lof(bunch, params) :
         'time' : elapsed
     }
     
+def run_autoencoder(bunch, params):
+    x, y_ground_truth = bunch.data, bunch.target
+    AE = AutoEncoder(**params)
 
+    # Fit + predict 
+    start = time.perf_counter()
+    AE.fit(x)
+    y_pred = AE.predict(x) 
+    elapsed = time.perf_counter() - start
+
+    scores = AE.decision_function(x)
+
+    auc = roc_auc_score(y_ground_truth, scores)
+    recall = recall_score(y_ground_truth, y_pred)
+    
+    return {
+        'auc':    auc,
+        'recall': recall,
+        'time':   elapsed
+    }
 
 def benchmark(datasets, algorithms):
     auc_list, recall_list, time_list = [], [], []
@@ -95,6 +116,7 @@ def benchmark(datasets, algorithms):
         auc_info, recall_info, time_info = {"dataset": bunch.name}, {"dataset": bunch.name}, {"dataset": bunch.name}
         
         for algo_name, algo_runner, params in algorithms:
+            print("  ", algo_name)
             res = algo_runner(bunch, params) 
             
             auc_info[algo_name]    = res['auc']
@@ -175,11 +197,27 @@ if __name__ == "__main__":
     filenames = list_all_file_name_in_folder()
     
     datasets = csv_data_into_bunch(filenames)
- 
+    
+    """
     algorithms = [
      ("IForest", run_iforest, {'n_estimators':200, 'contamination':0.1}),
      ("LOF", run_lof, {'n_neighbors':300, 'contamination':0.1}),
+     ("AutoEncoder", run_autoencoder, {'contamination':0.1})
     ]
-
+    """
+    """
+    algorithms = [
+     ("IForest", run_iforest, {'n_estimators':100, 'contamination':0.1}),
+     ("AutoEncoder", run_autoencoder, {'contamination':0.1})
+    ]
+    """
+    
+    algorithms = [
+     ("IForest", run_iforest, {'n_estimators':100, 'contamination':0.1}),
+     ("LOF", run_lof, {'n_neighbors':150, 'contamination':0.1}),
+     ("AutoEncoder", run_autoencoder, {'contamination':0.1})
+    ]
+    
+    
 
     automatisation(datasets, algorithms)

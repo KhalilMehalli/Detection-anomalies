@@ -1,0 +1,200 @@
+2025-07-09 20:10:03
+IForest: n_estimators=100, contamination=0.1; LOF: n_neighbors=150, contamination=0.1; AutoEncoder: contamination=0.1
+
+%=== AUC table ===
+\begin{tabular}{lrrr}
+\toprule
+dataset & IForest & LOF & AutoEncoder \\ \hline
+\midrule
+speech & 0.47 & 0.48 & 0.48 \\ \hline
+kddcup99 http & 0.97 & 0.59 & 1.00 \\ \hline
+kddcup2014 donneurs  & 0.79 & 0.62 & 0.83 \\ \hline
+satellite & 0.95 & 0.97 & 0.93 \\ \hline
+fraude & 0.95 & 0.61 & 0.95 \\ \hline
+cancer du sein & 0.99 & 0.98 & 0.95 \\ \hline
+shuttle & 1.00 & 0.53 & 0.98 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrrr}
+\toprule
+dataset & IForest & LOF & AutoEncoder \\ \hline
+\midrule
+speech & 0.10 & 0.11 & 0.11 \\ \hline
+kddcup99 http & 0.94 & 0.30 & 1.00 \\ \hline
+kddcup2014 donneurs  & 0.19 & 0.26 & 0.25 \\ \hline
+satellite & 0.85 & 0.91 & 0.83 \\ \hline
+fraude & 0.90 & 0.20 & 0.88 \\ \hline
+cancer du sein & 1.00 & 1.00 & 0.80 \\ \hline
+shuttle & 0.99 & 0.27 & 1.00 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrrr}
+\toprule
+dataset & IForest & LOF & AutoEncoder \\ \hline
+\midrule
+speech & 0.13 & 0.21 & 4.08 \\ \hline
+kddcup99 http & 3.12 & 563.62 & 425.74 \\ \hline
+kddcup2014 donneurs  & 5.05 & 622.77 & 410.13 \\ \hline
+satellite & 0.20 & 0.11 & 3.45 \\ \hline
+fraude & 2.19 & 137.10 & 192.57 \\ \hline
+cancer du sein & 0.16 & 0.01 & 0.23 \\ \hline
+shuttle & 0.55 & 13.62 & 30.24 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-09 17:46:02
+IForest: n_estimators=200, contamination=0.1; LOF: n_neighbors=300, contamination=0.1; AutoEncoder: contamination=0.1
+
+%=== AUC table ===
+\begin{tabular}{lrrr}
+\toprule
+dataset & IForest & LOF & AutoEncoder \\ \hline
+\midrule
+speech & 0.48 & 0.48 & 0.48 \\ \hline
+kddcup99 http & 0.97 & 0.43 & 1.00 \\ \hline
+kddcup2014 donneurs  & 0.79  & non & 0.83\\ \hline
+satellite & 0.95 & 0.95 & 0.93 \\ \hline
+fraude & 0.95 & 0.84 & 0.95 \\ \hline
+cancer du sein & 0.99 & 0.98 & 0.95 \\ \hline
+shuttle & 1.00 & 0.67 & 0.98 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrrr}
+\toprule
+dataset & IForest & LOF & AutoEncoder \\ \hline
+\midrule
+speech & 0.11 & 0.11 & 0.11 \\ \hline
+kddcup99 http & 0.91 & 0.20 & 1.00 \\ \hline
+kddcup2014 donneurs  & 0.19 & non &0.25 \\ \hline
+satellite & 0.85 & 0.84 & 0.83 \\ \hline
+fraude & 0.89 & 0.58 & 0.88 \\ \hline
+cancer du sein & 1.00 & 1.00 & 0.80 \\ \hline
+shuttle & 0.99 & 0.33 & 1.00 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrrr}
+\toprule
+dataset & IForest & LOF & AutoEncoder \\ \hline
+\midrule
+speech & 0.25 & 0.36 & 5.44 \\ \hline
+kddcup99 http & 6.14 & 533.15 & 420.93 \\ \hline
+kddcup2014 donneurs  & 10.51 & non &425.86 \\ \hline
+satellite & 0.35 & 0.17 & 3.38 \\ \hline
+fraude & 4.09 & 149.29 & 191.62 \\ \hline
+cancer du sein & 0.26 & 0.01 & 0.20 \\ \hline
+shuttle & 0.97 & 17.44 & 30.69 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-09 16:32:45
+IForest: n_estimators=100, contamination=0.1; AutoEncoder: contamination=0.1
+
+%=== AUC table ===
+\begin{tabular}{lrr}
+\toprule
+dataset & IForest & AutoEncoder \\ \hline
+\midrule
+speech & 0.47 & 0.48 \\ \hline
+kddcup99 http & 0.97 & 1.00 \\ \hline
+kddcup2014 donneurs  & 0.79 & 0.83 \\ \hline
+satellite & 0.95 & 0.93 \\ \hline
+fraude & 0.95 & 0.95 \\ \hline
+cancer du sein & 0.99 & 0.95 \\ \hline
+shuttle & 1.00 & 0.98 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrr}
+\toprule
+dataset & IForest & AutoEncoder \\ \hline
+\midrule
+speech & 0.13 & 0.11 \\ \hline
+kddcup99 http & 0.94 & 1.00 \\ \hline
+kddcup2014 donneurs  & 0.19 & 0.25 \\ \hline
+satellite & 0.85 & 0.83 \\ \hline
+fraude & 0.90 & 0.88 \\ \hline
+cancer du sein & 1.00 & 0.80 \\ \hline
+shuttle & 0.99 & 1.00 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrr}
+\toprule
+dataset & IForest & AutoEncoder \\ \hline
+\midrule
+speech & 0.19 & 7.73 \\ \hline
+kddcup99 http & 3.77 & 385.62 \\ \hline
+kddcup2014 donneurs  & 4.92 & 403.31 \\ \hline
+satellite & 0.21 & 3.27 \\ \hline
+fraude & 2.15 & 189.77 \\ \hline
+cancer du sein & 0.17 & 0.23 \\ \hline
+shuttle & 0.51 & 29.61 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-09 13:14:30
+IForest: n_estimators=100, contamination=0.1; LOF: n_neighbors=150, contamination=0.1
+
+%=== AUC table ===
+\begin{tabular}{lrr}
+\toprule
+dataset & IForest & LOF \\ \hline
+\midrule
+speech & 0.43 & 0.48 \\ \hline
+kddcup99 http & 0.95 & 0.59 \\ \hline
+kddcup2014 donneurs  & 0.78 & 0.62 \\ \hline
+satellite & 0.95 & 0.97 \\ \hline
+fraude & 0.96 & 0.61 \\ \hline
+cancer du sein & 0.97 & 0.98 \\ \hline
+shuttle & 1.00 & 0.53 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrr}
+\toprule
+dataset & IForest & LOF \\ \hline
+\midrule
+speech & 0.08 & 0.11 \\ \hline
+kddcup99 http & 0.73 & 0.30 \\ \hline
+kddcup2014 donneurs  & 0.17 & 0.26 \\ \hline
+satellite & 0.83 & 0.91 \\ \hline
+fraude & 0.91 & 0.20 \\ \hline
+cancer du sein & 0.80 & 1.00 \\ \hline
+shuttle & 0.99 & 0.27 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrr}
+\toprule
+dataset & IForest & LOF \\ \hline
+\midrule
+speech & 0.14 & 0.27 \\ \hline
+kddcup99 http & 3.10 & 636.00 \\ \hline
+kddcup2014 donneurs  & 6.64 & 684.95 \\ \hline
+satellite & 0.16 & 0.10 \\ \hline
+fraude & 2.62 & 146.19 \\ \hline
+cancer du sein & 0.12 & 0.01 \\ \hline
+shuttle & 0.50 & 15.79 \\ \hline
+\bottomrule
+\end{tabular}
+
