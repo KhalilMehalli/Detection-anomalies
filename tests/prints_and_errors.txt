@@ -1,0 +1,28 @@
+Datasets used : ['../data_rapport/speech.csv', '../data_rapport/cancerS.csv', '../data_rapport/donneurs.csv', '../data_rapport/satellite.csv', '../data_rapport/fraude.csv', '../data_rapport/cancer du sein.csv', '../data_rapport/http.csv', '../data_rapport/shuttle.csv']
+Algortihms used : {'knn', 'ae'}
+DÉBUT
+speech  : départ
+   AE : départ
+Training:   0%|          | 0/10 [00:00<?, ?it/s]Training:  10%|█         | 1/10 [00:00<00:03,  2.88it/s]Training:  20%|██        | 2/10 [00:00<00:02,  2.99it/s]Training:  30%|███       | 3/10 [00:00<00:02,  3.09it/s]Training:  40%|████      | 4/10 [00:01<00:02,  2.33it/s]Training:  50%|█████     | 5/10 [00:01<00:01,  2.54it/s]Training:  60%|██████    | 6/10 [00:02<00:01,  2.68it/s]Training:  70%|███████   | 7/10 [00:02<00:01,  2.77it/s]Training:  80%|████████  | 8/10 [00:02<00:00,  2.91it/s]Training:  90%|█████████ | 9/10 [00:03<00:00,  2.94it/s]Training: 100%|██████████| 10/10 [00:03<00:00,  2.93it/s]Training: 100%|██████████| 10/10 [00:03<00:00,  2.81it/s]
+Total execution time 6.441703009000776
+AUC : 0.469856416054268 RAPPEL : 0.13114754098360656 TEMPS : 6.344253019000462
+   AE : fini
+   KNN : départ
+Total execution time 21.731338026998856
+AUC : 0.4912334652345958 RAPPEL : 0.11475409836065574 TEMPS : 11.108915664997767
+   KNN : fini
+speech  : fini
+cancerS  : départ
+   AE : départ
+Training:   0%|          | 0/10 [00:00<?, ?it/s]Training:  30%|███       | 3/10 [00:00<00:00, 22.76it/s]Training:  60%|██████    | 6/10 [00:00<00:00, 20.48it/s]Training:  90%|█████████ | 9/10 [00:00<00:00, 23.89it/s]Training: 100%|██████████| 10/10 [00:00<00:00, 23.34it/s]
+Total execution time 0.4651494760000787
+AUC : 0.9274509803921569 RAPPEL : 0.7 TEMPS : 0.45265982699856977
+   AE : fini
+   KNN : départ
+Total execution time 0.0862526839991915
+AUC : 0.9781512605042016 RAPPEL : 1.0 TEMPS : 0.05365563599843881
+   KNN : fini
+cancerS  : fini
+donneurs  : départ
+   AE : départ
+Training:   0%|          | 0/10 [00:00<?, ?it/s]

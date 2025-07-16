@@ -1,0 +1,4 @@
+dataset,IForest,LOF
+speech,0.17,0.32
+cancerS,0.12,0.00
+satellite,0.12,0.03

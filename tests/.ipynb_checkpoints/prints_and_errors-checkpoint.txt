@@ -1,0 +1,37 @@
+DÉBUT
+speech  : départ
+   IForest : départ
+AUC : 0.4565743357829282 RAPPEL : 0.06557377049180328 TEMPS : 0.15574539200315485
+   IForest : fini
+speech  : fini
+kddcup99 http  : départ
+   IForest : départ
+AUC : 0.9579634594499135 RAPPEL : 0.7404942965779467 TEMPS : 3.4222040139939054
+   IForest : fini
+kddcup99 http  : fini
+kddcup2014 donneurs   : départ
+   IForest : départ
+AUC : 0.7817898113640437 RAPPEL : 0.15941160446744757 TEMPS : 5.198094460996799
+   IForest : fini
+kddcup2014 donneurs   : fini
+satellite  : départ
+   IForest : départ
+AUC : 0.9390965174129353 RAPPEL : 0.84 TEMPS : 0.1298785940016387
+   IForest : fini
+satellite  : fini
+fraude  : départ
+   IForest : départ
+AUC : 0.9466840461934682 RAPPEL : 0.9004065040650406 TEMPS : 2.095211059000576
+   IForest : fini
+fraude  : fini
+cancer du sein  : départ
+   IForest : départ
+AUC : 0.980672268907563 RAPPEL : 1.0 TEMPS : 0.10361005299637327
+   IForest : fini
+cancer du sein  : fini
+shuttle  : départ
+   IForest : départ
+AUC : 0.998211121046135 RAPPEL : 0.9908883826879271 TEMPS : 0.4894904980028514
+   IForest : fini
+shuttle  : fini
+FIN

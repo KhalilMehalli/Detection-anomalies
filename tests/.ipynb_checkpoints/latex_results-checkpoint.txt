@@ -1,0 +1,1203 @@
+
+
+2025-07-16 13:19:28
+KNN: n_jobs=-1
+
+%=== AUC table ===
+\begin{tabular}{lr}
+\toprule
+dataset & KNN \\ \hline
+\midrule
+speech & 0.49 \\ \hline
+cancerS & 0.98 \\ \hline
+satellite & 0.97 \\ \hline
+shuttle & 0.88 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lr}
+\toprule
+dataset & KNN \\ \hline
+\midrule
+speech & 0.11 \\ \hline
+cancerS & 1.00 \\ \hline
+satellite & 0.87 \\ \hline
+shuttle & 0.59 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lr}
+\toprule
+dataset & KNN \\ \hline
+\midrule
+speech & 8.60 \\ \hline
+cancerS & 0.02 \\ \hline
+satellite & 0.69 \\ \hline
+shuttle & 9.17 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-16 10:01:42
+AnoGan: preprocessing=False, epochs=10
+
+%=== AUC table ===
+\begin{tabular}{lr}
+\toprule
+dataset & AnoGan \\ \hline
+\midrule
+speech & 0.47 \\ \hline
+cancerS & 0.99 \\ \hline
+satellite & 0.87 \\ \hline
+shuttle & 0.99 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lr}
+\toprule
+dataset & AnoGan \\ \hline
+\midrule
+speech & 0.89 \\ \hline
+cancerS & 1.00 \\ \hline
+satellite & 1.00 \\ \hline
+shuttle & 0.99 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lr}
+\toprule
+dataset & AnoGan \\ \hline
+\midrule
+speech & 160.62 \\ \hline
+cancerS & 10.98 \\ \hline
+satellite & 162.36 \\ \hline
+shuttle & 1525.59 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 22:29:33
+IForest: random_state=10; LOF: ; AE: random_state=10, preprocessing=False, epoch_num=10; VAE: random_state=10, preprocessing=False, epoch_num=10; DeepSVDD: random_state=10, preprocessing=False, epochs=10, n_features=29; AE1SVM: preprocessing=False, epochs=10
+
+%=== AUC table ===
+\begin{tabular}{lrrrrrr}
+\toprule
+dataset & IForest & LOF & AE & VAE & DeepSVDD & AE1SVM \\ \hline
+\midrule
+donneurs & 0.79 & 0.57 & 0.74 & 0.59 & 0.65 & 0.38 \\ \hline
+http & 0.97 & 0.52 & 1.00 & 1.00 & 1.00 & 1.00 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrrrrrr}
+\toprule
+dataset & IForest & LOF & AE & VAE & DeepSVDD & AE1SVM \\ \hline
+\midrule
+donneurs & 0.85 & 0.05 & 0.22 & 0.15 & 0.22 & 0.08 \\ \hline
+http & 0.85 & 0.14 & 1.00 & 1.00 & 1.00 & 1.00 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrrrrrr}
+\toprule
+dataset & IForest & LOF & AE & VAE & DeepSVDD & AE1SVM \\ \hline
+\midrule
+donneurs & 2.67 & 564.65 & 335.65 & 561.56 & 63.41 & 897.91 \\ \hline
+http & 1.90 & 577.01 & 370.56 & 571.96 & 70.23 & 889.16 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 21:05:53
+IForest: random_state=10; LOF: ; AE: random_state=10, preprocessing=False, epoch_num=10; VAE: random_state=10, preprocessing=False, epoch_num=10; DeepSVDD: random_state=10, preprocessing=False, epochs=10, n_features=9; AE1SVM: preprocessing=False, epochs=10
+
+%=== AUC table ===
+\begin{tabular}{lrrrrrr}
+\toprule
+dataset & IForest & LOF & AE & VAE & DeepSVDD & AE1SVM \\ \hline
+\midrule
+speech & 0.47 & 0.51 & 0.47 & 0.47 & 0.45 & 0.47 \\ \hline
+cancerS & 0.98 & 0.98 & 0.93 & 0.97 & 0.98 & 0.94 \\ \hline
+satellite & 0.96 & 0.68 & 0.95 & 0.93 & 0.78 & 0.93 \\ \hline
+fraude & 0.95 & 0.51 & 0.95 & 0.95 & 0.93 & 0.95 \\ \hline
+shuttle & 1.00 & 0.48 & 0.99 & 1.00 & 0.99 & 0.99 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrrrrrr}
+\toprule
+dataset & IForest & LOF & AE & VAE & DeepSVDD & AE1SVM \\ \hline
+\midrule
+speech & 0.00 & 0.00 & 0.13 & 0.11 & 0.05 & 0.11 \\ \hline
+cancerS & 0.90 & 0.90 & 0.70 & 0.90 & 1.00 & 0.70 \\ \hline
+satellite & 0.84 & 0.32 & 0.84 & 0.80 & 0.53 & 0.80 \\ \hline
+fraude & 0.83 & 0.12 & 0.90 & 0.90 & 0.88 & 0.89 \\ \hline
+shuttle & 0.99 & 0.10 & 1.00 & 0.99 & 0.97 & 0.98 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrrrrrr}
+\toprule
+dataset & IForest & LOF & AE & VAE & DeepSVDD & AE1SVM \\ \hline
+\midrule
+speech & 0.11 & 0.13 & 3.70 & 3.56 & 0.68 & 3.98 \\ \hline
+cancerS & 0.11 & 0.00 & 0.17 & 0.27 & 0.05 & 0.37 \\ \hline
+satellite & 0.14 & 0.05 & 2.55 & 3.82 & 0.56 & 4.84 \\ \hline
+fraude & 1.15 & 94.76 & 149.03 & 252.88 & 31.02 & 386.31 \\ \hline
+shuttle & 0.39 & 5.92 & 27.05 & 41.40 & 5.26 & 51.09 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 18:29:42
+IForest: random_state=10
+
+%=== AUC table ===
+\begin{tabular}{lr}
+\toprule
+dataset & IForest \\ \hline
+\midrule
+cancerS & 0.98 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lr}
+\toprule
+dataset & IForest \\ \hline
+\midrule
+cancerS & 0.90 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lr}
+\toprule
+dataset & IForest \\ \hline
+\midrule
+cancerS & 0.11 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 17:47:34
+IForest: random_state=10; LOF: ; AE: random_state=10, preprocessing=False, epoch_num=10; VAE: random_state=10, preprocessing=False, epoch_num=10; DeepSVDD: random_state=10, preprocessing=False, epochs=10, n_features=400; AE1SVM: preprocessing=False, epochs=10; KNN: 
+
+%=== AUC table ===
+\begin{tabular}{lrrrrrrr}
+\toprule
+dataset & IForest & LOF & AE & VAE & DeepSVDD & AE1SVM & KNN \\ \hline
+\midrule
+speech & 0.47 & 0.51 & 0.47 & 0.47 & 0.45 & 0.47 & 0.49 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrrrrrrr}
+\toprule
+dataset & IForest & LOF & AE & VAE & DeepSVDD & AE1SVM & KNN \\ \hline
+\midrule
+speech & 0.00 & 0.00 & 0.13 & 0.11 & 0.05 & 0.11 & 0.11 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrrrrrrr}
+\toprule
+dataset & IForest & LOF & AE & VAE & DeepSVDD & AE1SVM & KNN \\ \hline
+\midrule
+speech & 0.11 & 0.13 & 3.87 & 3.92 & 0.66 & 4.41 & 8.32 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 17:28:00
+LOF: 
+
+%=== AUC table ===
+\begin{tabular}{lr}
+\toprule
+dataset & LOF \\ \hline
+\midrule
+speech & 0.51 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lr}
+\toprule
+dataset & LOF \\ \hline
+\midrule
+speech & 0.00 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lr}
+\toprule
+dataset & LOF \\ \hline
+\midrule
+speech & 0.13 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 17:24:56
+IForest: ; LOF: ; AE: random_state=10, preprocessing=False, epoch_num=10; VAE: random_state=10, preprocessing=False, epoch_num=10; DeepSVDD: random_state=10, preprocessing=False, epochs=10, n_features=400; AE1SVM: preprocessing=False, epochs=10; KNN: 
+
+%=== AUC table ===
+\begin{tabular}{lrrrrrrr}
+\toprule
+dataset & IForest & LOF & AE & VAE & DeepSVDD & AE1SVM & KNN \\ \hline
+\midrule
+speech & 0.46 & 0.51 & 0.47 & 0.47 & 0.45 & 0.47 & 0.49 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrrrrrrr}
+\toprule
+dataset & IForest & LOF & AE & VAE & DeepSVDD & AE1SVM & KNN \\ \hline
+\midrule
+speech & 0.02 & 0.00 & 0.13 & 0.11 & 0.05 & 0.11 & 0.11 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrrrrrrr}
+\toprule
+dataset & IForest & LOF & AE & VAE & DeepSVDD & AE1SVM & KNN \\ \hline
+\midrule
+speech & 0.11 & 0.13 & 3.88 & 3.85 & 0.68 & 4.22 & 8.16 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 17:23:37
+IForest: random_state=10; LOF: ; AE: random_state=10, preprocessing=False, epoch_num=10; VAE: random_state=10, preprocessing=False, epoch_num=10; DeepSVDD: random_state=10, preprocessing=False, epochs=10, n_features=400; AE1SVM: preprocessing=False, epochs=10; KNN: 
+
+%=== AUC table ===
+\begin{tabular}{lrrrrrrr}
+\toprule
+dataset & IForest & LOF & AE & VAE & DeepSVDD & AE1SVM & KNN \\ \hline
+\midrule
+speech & 0.47 & 0.51 & 0.47 & 0.47 & 0.45 & 0.47 & 0.49 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrrrrrrr}
+\toprule
+dataset & IForest & LOF & AE & VAE & DeepSVDD & AE1SVM & KNN \\ \hline
+\midrule
+speech & 0.00 & 0.00 & 0.13 & 0.11 & 0.05 & 0.11 & 0.11 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrrrrrrr}
+\toprule
+dataset & IForest & LOF & AE & VAE & DeepSVDD & AE1SVM & KNN \\ \hline
+\midrule
+speech & 0.12 & 0.14 & 3.85 & 3.98 & 0.70 & 4.45 & 8.19 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 17:11:10
+IForest: random_state=10
+
+%=== AUC table ===
+\begin{tabular}{lrrrrrrr}
+\toprule
+algorithm & speech & cancerS & donneurs & satellite & fraude & http & shuttle \\ \hline
+\midrule
+IForest & 0.47 & 0.98 & 0.79 & 0.96 & 0.95 & 0.97 & 1.00 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrrrrrrr}
+\toprule
+algorithm & speech & cancerS & donneurs & satellite & fraude & http & shuttle \\ \hline
+\midrule
+IForest & 0.00 & 0.90 & 0.85 & 0.84 & 0.83 & 0.85 & 0.99 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrrrrrrr}
+\toprule
+algorithm & speech & cancerS & donneurs & satellite & fraude & http & shuttle \\ \hline
+\midrule
+IForest & 0.12 & 0.09 & 2.74 & 0.11 & 1.23 & 1.78 & 0.28 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 17:10:41
+IForest: random_state=10
+
+%=== AUC table ===
+\begin{tabular}{lr}
+\toprule
+algorithm & cancerS \\ \hline
+\midrule
+IForest & 0.98 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lr}
+\toprule
+algorithm & cancerS \\ \hline
+\midrule
+IForest & 0.90 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lr}
+\toprule
+algorithm & cancerS \\ \hline
+\midrule
+IForest & 0.10 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 17:07:10
+IForest: random_state=10
+
+%=== AUC table ===
+\begin{tabular}{lr}
+\toprule
+algorithm & speech \\ \hline
+\midrule
+IForest & 0.47 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lr}
+\toprule
+algorithm & speech \\ \hline
+\midrule
+IForest & 0.00 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lr}
+\toprule
+algorithm & speech \\ \hline
+\midrule
+IForest & 0.11 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 17:06:51
+IForest: random_state=10
+
+%=== AUC table ===
+\begin{tabular}{lr}
+\toprule
+algorithm & speech \\ \hline
+\midrule
+IForest & 0.47 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lr}
+\toprule
+algorithm & speech \\ \hline
+\midrule
+IForest & 0.00 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lr}
+\toprule
+algorithm & speech \\ \hline
+\midrule
+IForest & 0.12 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 17:06:40
+IForest: random_state=10
+
+%=== AUC table ===
+\begin{tabular}{l}
+\toprule
+algorithm \\ \hline
+\midrule
+IForest \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{l}
+\toprule
+algorithm \\ \hline
+\midrule
+IForest \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{l}
+\toprule
+algorithm \\ \hline
+\midrule
+IForest \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 17:05:59
+IForest: random_state=10
+
+%=== AUC table ===
+\begin{tabular}{l}
+\toprule
+algorithm \\ \hline
+\midrule
+IForest \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{l}
+\toprule
+algorithm \\ \hline
+\midrule
+IForest \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{l}
+\toprule
+algorithm \\ \hline
+\midrule
+IForest \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 17:05:20
+IForest: random_state=10
+
+%=== AUC table ===
+\begin{tabular}{l}
+\toprule
+algorithm \\ \hline
+\midrule
+IForest \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{l}
+\toprule
+algorithm \\ \hline
+\midrule
+IForest \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{l}
+\toprule
+algorithm \\ \hline
+\midrule
+IForest \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 17:05:02
+IForest: random_state=10
+
+%=== AUC table ===
+\begin{tabular}{l}
+\toprule
+algorithm \\ \hline
+\midrule
+IForest \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{l}
+\toprule
+algorithm \\ \hline
+\midrule
+IForest \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{l}
+\toprule
+algorithm \\ \hline
+\midrule
+IForest \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 17:04:19
+IForest: random_state=10; AE: random_state=10, preprocessing=False, epoch_num=10; VAE: random_state=10, preprocessing=False, epoch_num=10; KNN: 
+
+%=== AUC table ===
+\begin{tabular}{l}
+\toprule
+algorithm \\ \hline
+\midrule
+IForest \\ \hline
+AE \\ \hline
+VAE \\ \hline
+KNN \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{l}
+\toprule
+algorithm \\ \hline
+\midrule
+IForest \\ \hline
+AE \\ \hline
+VAE \\ \hline
+KNN \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{l}
+\toprule
+algorithm \\ \hline
+\midrule
+IForest \\ \hline
+AE \\ \hline
+VAE \\ \hline
+KNN \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 17:02:08
+IForest: random_state=10; AE: random_state=10, preprocessing=False, epoch_num=10; VAE: random_state=10, preprocessing=False, epoch_num=10; KNN: 
+
+%=== AUC table ===
+\begin{tabular}{lrr}
+\toprule
+algorithm & speech & satellite \\ \hline
+\midrule
+IForest & 0.47 & 0.96 \\ \hline
+AE & 0.47 & 0.95 \\ \hline
+VAE & 0.47 & 0.93 \\ \hline
+KNN & 0.49 & 0.97 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrr}
+\toprule
+algorithm & speech & satellite \\ \hline
+\midrule
+IForest & 0.00 & 0.84 \\ \hline
+AE & 0.13 & 0.84 \\ \hline
+VAE & 0.11 & 0.80 \\ \hline
+KNN & 0.11 & 0.87 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrr}
+\toprule
+algorithm & speech & satellite \\ \hline
+\midrule
+IForest & 0.12 & 0.12 \\ \hline
+AE & 4.03 & 2.95 \\ \hline
+VAE & 4.11 & 4.04 \\ \hline
+KNN & 8.37 & 0.77 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 17:00:16
+IForest: random_state=10; AE: random_state=10, preprocessing=False, epoch_num=10; VAE: random_state=10, preprocessing=False, epoch_num=10
+
+%=== AUC table ===
+\begin{tabular}{lrr}
+\toprule
+algorithm & speech & satellite \\ \hline
+\midrule
+IForest & 0.47 & 0.96 \\ \hline
+AE & 0.47 & 0.95 \\ \hline
+VAE & 0.47 & 0.93 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrr}
+\toprule
+algorithm & speech & satellite \\ \hline
+\midrule
+IForest & 0.00 & 0.84 \\ \hline
+AE & 0.13 & 0.84 \\ \hline
+VAE & 0.11 & 0.80 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrr}
+\toprule
+algorithm & speech & satellite \\ \hline
+\midrule
+IForest & 0.13 & 0.12 \\ \hline
+AE & 4.21 & 2.88 \\ \hline
+VAE & 4.04 & 4.00 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 16:59:18
+IForest: random_state=10; AE: random_state=10, preprocessing=False, epoch_num=10
+
+%=== AUC table ===
+\begin{tabular}{lrr}
+\toprule
+algorithm & speech & satellite \\ \hline
+\midrule
+IForest & 0.47 & 0.96 \\ \hline
+AE & 0.47 & 0.95 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrr}
+\toprule
+algorithm & speech & satellite \\ \hline
+\midrule
+IForest & 0.00 & 0.84 \\ \hline
+AE & 0.13 & 0.84 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrr}
+\toprule
+algorithm & speech & satellite \\ \hline
+\midrule
+IForest & 0.11 & 0.11 \\ \hline
+AE & 4.07 & 2.74 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 16:57:30
+IForest: random_state=10; AE: random_state=10, preprocessing=False, epoch_num=10
+
+%=== AUC table ===
+\begin{tabular}{lrr}
+\toprule
+dataset & IForest & AE \\ \hline
+\midrule
+speech & 0.47 & 0.47 \\ \hline
+satellite & 0.96 & 0.95 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrr}
+\toprule
+dataset & IForest & AE \\ \hline
+\midrule
+speech & 0.00 & 0.13 \\ \hline
+satellite & 0.84 & 0.84 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrr}
+\toprule
+dataset & IForest & AE \\ \hline
+\midrule
+speech & 0.11 & 5.53 \\ \hline
+satellite & 0.13 & 3.01 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 13:46:15
+IForest: random_state=10
+
+%=== AUC table ===
+\begin{tabular}{lr}
+\toprule
+dataset & IForest \\ \hline
+\midrule
+speech & 0.47 \\ \hline
+cancerS & 0.98 \\ \hline
+donneurs & 0.79 \\ \hline
+satellite & 0.96 \\ \hline
+fraude & 0.95 \\ \hline
+cancer du sein & 0.98 \\ \hline
+http & 0.97 \\ \hline
+shuttle & 1.00 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lr}
+\toprule
+dataset & IForest \\ \hline
+\midrule
+speech & 0.00 \\ \hline
+cancerS & 0.90 \\ \hline
+donneurs & 0.85 \\ \hline
+satellite & 0.84 \\ \hline
+fraude & 0.83 \\ \hline
+cancer du sein & 0.90 \\ \hline
+http & 0.85 \\ \hline
+shuttle & 0.99 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lr}
+\toprule
+dataset & IForest \\ \hline
+\midrule
+speech & 0.22 \\ \hline
+cancerS & 0.15 \\ \hline
+donneurs & 4.07 \\ \hline
+satellite & 0.19 \\ \hline
+fraude & 1.84 \\ \hline
+cancer du sein & 0.16 \\ \hline
+http & 2.66 \\ \hline
+shuttle & 0.54 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 13:42:19
+IForest: random_state=10; LOF: ; AE: random_state=10, preprocessing=False, epoch_num=10
+
+%=== AUC table ===
+\begin{tabular}{lrrr}
+\toprule
+dataset & IForest & LOF & AE \\ \hline
+\midrule
+satellite & 0.96 & 0.68 & 0.95 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrrr}
+\toprule
+dataset & IForest & LOF & AE \\ \hline
+\midrule
+satellite & 0.84 & 0.32 & 0.84 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrrr}
+\toprule
+dataset & IForest & LOF & AE \\ \hline
+\midrule
+satellite & 0.14 & 0.08 & 5.94 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 13:41:29
+IForest: random_state=10
+
+%=== AUC table ===
+\begin{tabular}{lr}
+\toprule
+dataset & IForest \\ \hline
+\midrule
+satellite & 0.96 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lr}
+\toprule
+dataset & IForest \\ \hline
+\midrule
+satellite & 0.84 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lr}
+\toprule
+dataset & IForest \\ \hline
+\midrule
+satellite & 0.14 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 13:35:22
+IForest: random_state=10; AE: random_state=10, preprocessing=False, epoch_num=10
+
+%=== AUC table ===
+\begin{tabular}{lrr}
+\toprule
+dataset & IForest & AE \\ \hline
+\midrule
+satellite & 0.96 & 0.95 \\ \hline
+shuttle & 1.00 & 0.99 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrr}
+\toprule
+dataset & IForest & AE \\ \hline
+\midrule
+satellite & 0.84 & 0.84 \\ \hline
+shuttle & 0.99 & 1.00 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrr}
+\toprule
+dataset & IForest & AE \\ \hline
+\midrule
+satellite & 0.14 & 6.08 \\ \hline
+shuttle & 0.44 & 45.97 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-15 13:32:59
+IForest: random_state=10
+
+%=== AUC table ===
+\begin{tabular}{lr}
+\toprule
+dataset & IForest \\ \hline
+\midrule
+satellite & 0.96 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lr}
+\toprule
+dataset & IForest \\ \hline
+\midrule
+satellite & 0.84 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lr}
+\toprule
+dataset & IForest \\ \hline
+\midrule
+satellite & 0.18 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-11 14:51:03
+IForest: n_estimators=100, contamination=0.1
+
+%=== AUC table ===
+\begin{tabular}{lr}
+\toprule
+dataset & IForest \\ \hline
+\midrule
+speech & 0.46 \\ \hline
+kddcup99 http & 0.96 \\ \hline
+kddcup2014 donneurs  & 0.78 \\ \hline
+satellite & 0.94 \\ \hline
+fraude & 0.95 \\ \hline
+cancer du sein & 0.98 \\ \hline
+shuttle & 1.00 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lr}
+\toprule
+dataset & IForest \\ \hline
+\midrule
+speech & 0.07 \\ \hline
+kddcup99 http & 0.74 \\ \hline
+kddcup2014 donneurs  & 0.16 \\ \hline
+satellite & 0.84 \\ \hline
+fraude & 0.90 \\ \hline
+cancer du sein & 1.00 \\ \hline
+shuttle & 0.99 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lr}
+\toprule
+dataset & IForest \\ \hline
+\midrule
+speech & 0.16 \\ \hline
+kddcup99 http & 3.42 \\ \hline
+kddcup2014 donneurs  & 5.20 \\ \hline
+satellite & 0.13 \\ \hline
+fraude & 2.10 \\ \hline
+cancer du sein & 0.10 \\ \hline
+shuttle & 0.49 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-09 20:10:03
+IForest: n_estimators=100, contamination=0.1; LOF: n_neighbors=150, contamination=0.1; AutoEncoder: contamination=0.1
+
+%=== AUC table ===
+\begin{tabular}{lrrr}
+\toprule
+dataset & IForest & LOF & AutoEncoder \\ \hline
+\midrule
+speech & 0.47 & 0.48 & 0.48 \\ \hline
+kddcup99 http & 0.97 & 0.59 & 1.00 \\ \hline
+kddcup2014 donneurs  & 0.79 & 0.62 & 0.83 \\ \hline
+satellite & 0.95 & 0.97 & 0.93 \\ \hline
+fraude & 0.95 & 0.61 & 0.95 \\ \hline
+cancer du sein & 0.99 & 0.98 & 0.95 \\ \hline
+shuttle & 1.00 & 0.53 & 0.98 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrrr}
+\toprule
+dataset & IForest & LOF & AutoEncoder \\ \hline
+\midrule
+speech & 0.10 & 0.11 & 0.11 \\ \hline
+kddcup99 http & 0.94 & 0.30 & 1.00 \\ \hline
+kddcup2014 donneurs  & 0.19 & 0.26 & 0.25 \\ \hline
+satellite & 0.85 & 0.91 & 0.83 \\ \hline
+fraude & 0.90 & 0.20 & 0.88 \\ \hline
+cancer du sein & 1.00 & 1.00 & 0.80 \\ \hline
+shuttle & 0.99 & 0.27 & 1.00 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrrr}
+\toprule
+dataset & IForest & LOF & AutoEncoder \\ \hline
+\midrule
+speech & 0.13 & 0.21 & 4.08 \\ \hline
+kddcup99 http & 3.12 & 563.62 & 425.74 \\ \hline
+kddcup2014 donneurs  & 5.05 & 622.77 & 410.13 \\ \hline
+satellite & 0.20 & 0.11 & 3.45 \\ \hline
+fraude & 2.19 & 137.10 & 192.57 \\ \hline
+cancer du sein & 0.16 & 0.01 & 0.23 \\ \hline
+shuttle & 0.55 & 13.62 & 30.24 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-09 17:46:02
+IForest: n_estimators=200, contamination=0.1; LOF: n_neighbors=300, contamination=0.1; AutoEncoder: contamination=0.1
+
+%=== AUC table ===
+\begin{tabular}{lrrr}
+\toprule
+dataset & IForest & LOF & AutoEncoder \\ \hline
+\midrule
+speech & 0.48 & 0.48 & 0.48 \\ \hline
+kddcup99 http & 0.97 & 0.43 & 1.00 \\ \hline
+kddcup2014 donneurs  & 0.79  & non & 0.83\\ \hline
+satellite & 0.95 & 0.95 & 0.93 \\ \hline
+fraude & 0.95 & 0.84 & 0.95 \\ \hline
+cancer du sein & 0.99 & 0.98 & 0.95 \\ \hline
+shuttle & 1.00 & 0.67 & 0.98 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrrr}
+\toprule
+dataset & IForest & LOF & AutoEncoder \\ \hline
+\midrule
+speech & 0.11 & 0.11 & 0.11 \\ \hline
+kddcup99 http & 0.91 & 0.20 & 1.00 \\ \hline
+kddcup2014 donneurs  & 0.19 & non &0.25 \\ \hline
+satellite & 0.85 & 0.84 & 0.83 \\ \hline
+fraude & 0.89 & 0.58 & 0.88 \\ \hline
+cancer du sein & 1.00 & 1.00 & 0.80 \\ \hline
+shuttle & 0.99 & 0.33 & 1.00 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrrr}
+\toprule
+dataset & IForest & LOF & AutoEncoder \\ \hline
+\midrule
+speech & 0.25 & 0.36 & 5.44 \\ \hline
+kddcup99 http & 6.14 & 533.15 & 420.93 \\ \hline
+kddcup2014 donneurs  & 10.51 & non &425.86 \\ \hline
+satellite & 0.35 & 0.17 & 3.38 \\ \hline
+fraude & 4.09 & 149.29 & 191.62 \\ \hline
+cancer du sein & 0.26 & 0.01 & 0.20 \\ \hline
+shuttle & 0.97 & 17.44 & 30.69 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-09 16:32:45
+IForest: n_estimators=100, contamination=0.1; AutoEncoder: contamination=0.1
+
+%=== AUC table ===
+\begin{tabular}{lrr}
+\toprule
+dataset & IForest & AutoEncoder \\ \hline
+\midrule
+speech & 0.47 & 0.48 \\ \hline
+kddcup99 http & 0.97 & 1.00 \\ \hline
+kddcup2014 donneurs  & 0.79 & 0.83 \\ \hline
+satellite & 0.95 & 0.93 \\ \hline
+fraude & 0.95 & 0.95 \\ \hline
+cancer du sein & 0.99 & 0.95 \\ \hline
+shuttle & 1.00 & 0.98 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrr}
+\toprule
+dataset & IForest & AutoEncoder \\ \hline
+\midrule
+speech & 0.13 & 0.11 \\ \hline
+kddcup99 http & 0.94 & 1.00 \\ \hline
+kddcup2014 donneurs  & 0.19 & 0.25 \\ \hline
+satellite & 0.85 & 0.83 \\ \hline
+fraude & 0.90 & 0.88 \\ \hline
+cancer du sein & 1.00 & 0.80 \\ \hline
+shuttle & 0.99 & 1.00 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrr}
+\toprule
+dataset & IForest & AutoEncoder \\ \hline
+\midrule
+speech & 0.19 & 7.73 \\ \hline
+kddcup99 http & 3.77 & 385.62 \\ \hline
+kddcup2014 donneurs  & 4.92 & 403.31 \\ \hline
+satellite & 0.21 & 3.27 \\ \hline
+fraude & 2.15 & 189.77 \\ \hline
+cancer du sein & 0.17 & 0.23 \\ \hline
+shuttle & 0.51 & 29.61 \\ \hline
+\bottomrule
+\end{tabular}
+
+2025-07-09 13:14:30
+IForest: n_estimators=100, contamination=0.1; LOF: n_neighbors=150, contamination=0.1
+
+%=== AUC table ===
+\begin{tabular}{lrr}
+\toprule
+dataset & IForest & LOF \\ \hline
+\midrule
+speech & 0.43 & 0.48 \\ \hline
+kddcup99 http & 0.95 & 0.59 \\ \hline
+kddcup2014 donneurs  & 0.78 & 0.62 \\ \hline
+satellite & 0.95 & 0.97 \\ \hline
+fraude & 0.96 & 0.61 \\ \hline
+cancer du sein & 0.97 & 0.98 \\ \hline
+shuttle & 1.00 & 0.53 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Recall table ===
+\begin{tabular}{lrr}
+\toprule
+dataset & IForest & LOF \\ \hline
+\midrule
+speech & 0.08 & 0.11 \\ \hline
+kddcup99 http & 0.73 & 0.30 \\ \hline
+kddcup2014 donneurs  & 0.17 & 0.26 \\ \hline
+satellite & 0.83 & 0.91 \\ \hline
+fraude & 0.91 & 0.20 \\ \hline
+cancer du sein & 0.80 & 1.00 \\ \hline
+shuttle & 0.99 & 0.27 \\ \hline
+\bottomrule
+\end{tabular}
+
+
+%=== Time table ===
+\begin{tabular}{lrr}
+\toprule
+dataset & IForest & LOF \\ \hline
+\midrule
+speech & 0.14 & 0.27 \\ \hline
+kddcup99 http & 3.10 & 636.00 \\ \hline
+kddcup2014 donneurs  & 6.64 & 684.95 \\ \hline
+satellite & 0.16 & 0.10 \\ \hline
+fraude & 2.62 & 146.19 \\ \hline
+cancer du sein & 0.12 & 0.01 \\ \hline
+shuttle & 0.50 & 15.79 \\ \hline
+\bottomrule
+\end{tabular}
+
