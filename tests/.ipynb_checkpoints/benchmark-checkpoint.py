@@ -7,299 +7,20 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 
+from python.algorithms import *
+from python.creation import list_all_file_name_in_folder,csv_data_into_bunch, create_checkpoint_csv, append_dict_to_csv, create_checkpoint_csv2
+
+
 from sklearn.metrics import roc_curve, auc, recall_score, roc_auc_score
-from sklearn.ensemble import IsolationForest
-from sklearn.neighbors import LocalOutlierFactor
 from sklearn.preprocessing import StandardScaler
 from sklearn.utils import Bunch
 
-from pyod.models.vae import VAE
-from pyod.models.deep_svdd import DeepSVDD
-from pyod.models.ae1svm import AE1SVM
-from pyod.models.knn import KNN
-from pyod.models.auto_encoder import AutoEncoder
 
-        
-def list_all_file_name_in_folder(folder="../data_rapport"):
-    return [os.path.join(folder, filename) for filename in os.listdir(folder) if filename.endswith(".csv")]
-
-def csv_data_into_bunch(filenames):
+def benchmark_dataset_algo(datasets, algorithms, auc_csv="./checkpoints/auc_checkpoint.csv", recall_csv="./checkpoints/recall_checkpoint.csv",time_csv="./checkpoints/time_checkpoint.csv"):
     """
-    This function assume that the csv file will have label egal to 1 for anomalie and 0 for normal value.
-    The csv have a header too.
-    """
-    datasets = []
-    for i in filenames:
-        name = os.path.splitext(os.path.basename(i))[0]
-
-        data = pd.read_csv(i).to_numpy()
-    
-        x = data[:,:-1]
-        y = data[:,-1]
-
-        # Standardisation
-        scaler = StandardScaler()
-        x_scaled = scaler.fit_transform(x)
-
-        # Store in a Bunch
-        datasets.append(Bunch(name=name, data=x_scaled, target=y))
-
-    return datasets
-
-    
-def run_iforest(bunch, params):
-    """
-    Fit and evaluate IsolationForest on a single dataset.
-
-    Parameters
-    ----------
-    bunch : Bunch
-        Must have attributes:
-          - data: feature data
-          - target: ground truth labels
-    params : dict
-        Keyword arguments for IsolationForest constructor.
-
-    Returns
-    -------
-    dict
-        {
-          'auc': float,      # ROC AUC score
-          'recall': float,   # recall score
-          'time': float      # elapsed time in seconds
-        }
-    """
-    x, y_ground_truth = bunch.data, bunch.target
-    IF = IsolationForest(**params)
-    
-    # Fit + predict 
-    start = time.perf_counter()
-    IF.fit(x)
-    y_pred = IF.predict(x) 
-    elapsed = time.perf_counter() - start
-
-    # Binairisation of the prediction and scores calculation 
-    y_pred = (y_pred == -1)
-    scores = -IF.decision_function(x)
-
-    # metrics
-    auc = roc_auc_score(y_ground_truth, scores)
-    recall = recall_score(y_ground_truth, y_pred)
-
-    total_time = time.perf_counter() - start
-    print("Total execution time", total_time)
-
-    return {
-        'auc': auc,
-        'recall': recall,
-        'time' : elapsed
-    }
-
-
-def run_lof(bunch, params) :
-    """
-    Fit and evaluate LocalOutlierFactor on a single dataset.
-
-    Parameters
-    ----------
-    bunch : Bunch
-        Must have attributes:
-          - data: feature data
-          - target: ground truth labels
-    params : dict
-        Keyword arguments for LocalOutlierFactor constructor.
-
-    Returns
-    -------
-    dict
-        {
-          'auc': float,      # ROC AUC score
-          'recall': float,   # recall score
-          'time': float      # elapsed time in seconds
-        }
-    """
-    
-    x, y_ground_truth = bunch.data, bunch.target
-    LOF = LocalOutlierFactor(** params)
-    
-    # Fit + predict 
-    start = time.perf_counter()
-    y_pred = LOF.fit_predict(x)
-    elapsed = time.perf_counter() - start
-
-    # Binairisation of the prediction and scores calculation 
-    y_pred = (y_pred == -1)
-    scores = -LOF.negative_outlier_factor_
-
-    # metrics
-    auc = roc_auc_score(y_ground_truth, scores)
-    recall = recall_score(y_ground_truth, y_pred)
-
-    total_time = time.perf_counter() - start
-    print("Total execution time", total_time)
-    
-    return {
-        'auc': auc,
-        'recall': recall,
-        'time' : elapsed
-    }
-    
-def run_autoencoder(bunch, params):
-    """
-    Fit and evaluate an AutoEncoder pyOD on a single dataset.
-
-    Parameters
-    ----------
-    bunch : Bunch
-        Must have attributes:
-          - data: feature data
-          - target: ground truth labels
-    params : dict
-        Keyword arguments for IsolationForest constructor.
-
-    Returns
-    -------
-    dict
-        {
-          'auc': float,      # ROC AUC score
-          'recall': float,   # recall score
-          'time': float      # elapsed time in seconds
-        }
-    """
-    x, y_ground_truth = bunch.data, bunch.target
-    AE = AutoEncoder(**params)
-
-    # Fit + predict 
-    start = time.perf_counter()
-    AE.fit(x)
-    y_pred = AE.predict(x) 
-    elapsed = time.perf_counter() - start
-
-    scores = AE.decision_function(x)
-
-    auc = roc_auc_score(y_ground_truth, scores)
-    recall = recall_score(y_ground_truth, y_pred)
-    
-    total_time = time.perf_counter() - start
-    print("Total execution time", total_time)
-    
-    return {
-        'auc':    auc,
-        'recall': recall,
-        'time':   elapsed
-    }
-
-def run_vae(bunch, params):
-    x, y_ground_truth = bunch.data, bunch.target
-    VAE_model = VAE(**params)
-
-    # Fit + predict 
-    start = time.perf_counter()
-    VAE_model.fit(x)
-    y_pred = VAE_model.predict(x)
-    elapsed = time.perf_counter() - start
-
-    # metrics
-    scores = VAE_model.decision_function(x)
-    
-    auc = roc_auc_score(y_ground_truth, scores)
-    recall = recall_score(y_ground_truth, y_pred)
-
-    total_time = time.perf_counter() - start
-    print("Total execution time", total_time)
-    
-    return {
-        'auc':    auc,
-        'recall': recall,
-        'time':   elapsed
-    }
-
-
-
-def run_deepsvdd(bunch, params):
-    x, y_ground_truth = bunch.data, bunch.target
-
-    # DeepSVDD have a mandatory parameters, the features numbers of the dataset      <- <- <-
-    features = x.shape[1]
-    params["n_features"] = features
-    
-    DS = DeepSVDD(**params)
-
-    # Fit + predict 
-    start = time.perf_counter()
-    DS.fit(x)
-    y_pred = DS.predict(x)
-    elapsed = time.perf_counter() - start
-
-    # metrics 
-    scores = DS.decision_function(x)
-    
-    auc = roc_auc_score(y_ground_truth, scores)
-    recall = recall_score(y_ground_truth, y_pred)
-
-    total_time = time.perf_counter() - start
-    print("Total execution time", total_time)
-    
-    return {
-        'auc':    auc,
-        'recall': recall,
-        'time':   elapsed
-    }
-
-def run_ae1svm(bunch, params):
-    x, y_ground_truth = bunch.data, bunch.target
-
-    AE1SVM_model = AE1SVM(**params)
-
-    # Fit + predict 
-    start = time.perf_counter()
-    AE1SVM_model.fit(x)
-    y_pred = AE1SVM_model.predict(x)
-    elapsed = time.perf_counter() - start
-
-    # metrics
-    scores = AE1SVM_model.decision_function(x)
-    
-    auc = roc_auc_score(y_ground_truth, scores)
-    recall = recall_score(y_ground_truth, y_pred)
-
-    total_time = time.perf_counter() - start
-    print("Total execution time", total_time)
-    
-    return {
-        'auc':    auc,
-        'recall': recall,
-        'time':   elapsed
-    }
-
-def run_knn(bunch, params):
-    x, y_ground_truth = bunch.data, bunch.target
-    KNN_model = KNN(**params)
-
-    # Fit + predict 
-    start = time.perf_counter()
-    KNN_model.fit(x)
-    y_pred = KNN_model.predict(x)
-    elapsed = time.perf_counter() - start
-
-    # metrics
-    scores = KNN_model.decision_function(x)
-    
-    auc = roc_auc_score(y_ground_truth, scores)
-    recall = recall_score(y_ground_truth, y_pred)
-
-    total_time = time.perf_counter() - start
-    print("Total execution time", total_time)
-    
-    return {
-        'auc':    auc,
-        'recall': recall,
-        'time':   elapsed
-    }
-    
-def benchmark(datasets, algorithms):
-    """
-    Run a benchmark of multiple algorithms on multiple datasets.
+    Run a benchmark of multiple algorithms on multiple datasets with checkpoints in csv.
+    Apply all algorithms to each dataset in turn 
+           
     
      datasets : list of Bunch
             Each Bunch must have attributes:
@@ -322,6 +43,8 @@ def benchmark(datasets, algorithms):
     df_time : pandas.DataFrame
         Execution time (seconds) for each (dataset × algorithm).
     """
+
+    create_checkpoint_csv(algorithms, auc_csv, recall_csv,time_csv) ### <- <-
     
     auc_list, recall_list, time_list = [], [], []
     
@@ -336,20 +59,88 @@ def benchmark(datasets, algorithms):
             auc_info[algo_name]    = res['auc']
             recall_info[algo_name] = res['recall']
             time_info[algo_name]   = res['time']
+            
             print("AUC :", res['auc'], "RAPPEL :", res['recall'],"TEMPS :", res['time'])
             print("  ", algo_name, ": fini")
             
         auc_list.append(auc_info)
         recall_list.append(recall_info)
         time_list.append(time_info)
+
+        append_dict_to_csv(auc_info,auc_csv) ### <- <-
+        append_dict_to_csv(recall_info,recall_csv)
+        append_dict_to_csv(time_info,time_csv)
+           
         print(bunch.name, " : fini")
+
+    df_auc    = pd.DataFrame(auc_list)
+    df_recall = pd.DataFrame(recall_list)
+    df_time   = pd.DataFrame(time_list)
+    
+    return df_auc, df_recall, df_time
+
+def benchmark_algo_dataset(datasets, algorithms, auc_csv="./checkpoints/auc_checkpoint.csv", recall_csv="./checkpoints/recall_checkpoint.csv",
+              time_csv="./checkpoints/time_checkpoint.csv"):
+    """
+    Run a benchmark of multiple algorithms on multiple datasets.
+    Apply all datasets to each algorithm in turn.
+    
+     datasets : list of Bunch
+            Each Bunch must have attributes:
+              - name : dataset name
+              - data : feature data
+              - target : ground truth labels
+        algorithms : list of tuples
+            Each tuple is (algo_name, runner_function, params_dict):
+              - algo_name : descriptive name of the algorithm
+              - runner_function : function(bunch, params) - > dict
+              - params_dict: parameters to pass to the runner
+
+
+    Returns
+    -------
+    df_auc : pandas.DataFrame
+        AUC scores for each (dataset × algorithm).
+    df_recall : pandas.DataFrame
+        Recall scores for each (dataset × algorithm).
+    df_time : pandas.DataFrame
+        Execution time (seconds) for each (dataset × algorithm).
+    """
+
+    create_checkpoint_csv2(datasets, auc_csv, recall_csv, time_csv)
+    auc_list, recall_list, time_list = [], [], []
+    
+    for algo_name, algo_runner, params in algorithms:
+        print(algo_name, " : départ")
+        auc_info, recall_info, time_info    = {"algorithm": algo_name}, {"algorithm": algo_name},{"algorithm": algo_name}        
+        
+        for bunch in datasets:
+        
+            print("  ", bunch.name, ": départ")
+            res = algo_runner(bunch, params) 
+            
+            auc_info[bunch.name]    = res["auc"]
+            recall_info[bunch.name] = res["recall"]
+            time_info[bunch.name]   = res["time"]
+
+            print("  ", "AUC :", res['auc'], "RAPPEL :", res['recall'],"TEMPS :", res['time'])
+            print("  ", bunch.name, ": fini")
+            
+        auc_list.append(auc_info)
+        recall_list.append(recall_info)
+        time_list.append(time_info)
+        print(algo_name, " : fini")
+
+        append_dict_to_csv(auc_info,auc_csv) 
+        append_dict_to_csv(recall_info,recall_csv)
+        append_dict_to_csv(time_info,time_csv)
         
     df_auc    = pd.DataFrame(auc_list)
     df_recall = pd.DataFrame(recall_list)
     df_time   = pd.DataFrame(time_list)
     
     return df_auc, df_recall, df_time
-        
+
 
 def add_hlines(latex):
     return latex.replace("\\\\", "\\\\ \\hline")
@@ -437,7 +228,7 @@ def write_latex_in_file(latex_auc, latex_recall,latex_time, algorithms, filepath
 
 
 
-def automatisation(datasets, algorithms, filepath = "./latex_results.txt"):   
+def automatisation(mode, datasets, algorithms, filepath = "./latex_results.txt"):   
     """
     Run the full pipeline: benchmark algorithms, convert results to LaTeX, and write to file.
 
@@ -455,7 +246,10 @@ def automatisation(datasets, algorithms, filepath = "./latex_results.txt"):
     start = time.perf_counter()
 
     # Calculate all the metrics
-    df_auc, df_recall, df_time = benchmark(datasets, algorithms)
+    if mode == "da":
+        df_auc, df_recall, df_time = benchmark_dataset_algo(datasets, algorithms)
+    else:
+       df_auc, df_recall, df_time = benchmark_algo_dataset(datasets, algorithms) 
 
     # Transform the metrics into latex tab 
     latex_auc, latex_recall, latex_time = pandas_to_latex(df_auc, df_recall, df_time)
@@ -487,7 +281,7 @@ def load_datasets(names=None):
     if names:
         # Keep only the datasets whose  appears in the provided names list.
         selected_files = [f for f in all_files 
-                          if os.path.splitext(os.path.basename(f))[0] in names ]
+                          if os.path.splitext(os.path.basename(f))[0].lower() in names ]
     else:
         # Or select all datasets
         selected_files = all_files
@@ -496,7 +290,7 @@ def load_datasets(names=None):
     # Convert the selected csv files into a list of bunch objects.
     return csv_data_into_bunch(selected_files)
 
-def get_algorithms(selected=None):
+def get_algorithms(all_algos, selected=None):
     """
     Selected only the algorithms the user want.
 
@@ -512,16 +306,6 @@ def get_algorithms(selected=None):
         Each tuple is (str, function, dict).
     """
     
-    all_algos = [
-        ("IForest",     run_iforest,     {"random_state":10}),
-        ("LOF",         run_lof,         {}),
-        ("AE", run_autoencoder, {"random_state":10, "preprocessing": False,"epoch_num": 10}),
-        ("VAE",         run_vae,         {"random_state":10, "preprocessing": False,"epoch_num": 10}),
-        ("DeepSVDD",    run_deepsvdd,    {"random_state":10,"preprocessing": False,"epochs": 10}),
-        ("AE1SVM",      run_ae1svm,      {"preprocessing": False,"epochs": 10}),
-        ("KNN",         run_knn,         {})
-    ]
-
     if selected:
         # Filter the full list to only include those is in the provided selected list 
         sel = {name.lower() for name in selected}
@@ -534,25 +318,34 @@ def get_algorithms(selected=None):
     return all_algos
 
 
-def parse_args():
+def parse_args(algo_names):
     """
     Parse command-line arguments to select datasets and algorithms.
 
     Returns
     -------
-    Namespace
-        Attributes:
+        Parser args:
         - dataset: list of chosen dataset names (or None)
         - algo:    list of chosen algorithm names (or None)
     """
     
     ds_names = [os.path.splitext(os.path.basename(p))[0] for p in list_all_file_name_in_folder()]
-    algo_names = ['iforest','lof','ae','vae','deepsvdd','ae1svm','knn']
     
     parser = argparse.ArgumentParser(description="Benchmark script for multiple anomaly detection algorithms")
 
     choices = [n.lower() for n in ds_names]
-                                
+
+    # Choose execution order: 
+    parser.add_argument(
+        "-m",
+        choices=["da","ad"],
+        default="da",
+        help= "Execution order:\n"
+            "  'da (dataset-algo)'  — apply all algorithms to each dataset in turn (default)\n"
+            "  'ad (algo-dataset)'  — apply all datasets to each algorithm in turn."
+    )
+
+    # Choose dataset(s): 
     parser.add_argument(
         "-d",
         nargs="+", # 1 or multiple datasets
@@ -561,6 +354,8 @@ def parse_args():
         type=str.lower, # convert the user in lowercase 
         help="Dataset(s) to load (use base filename, without .csv). Default: all."
     )
+
+    # Choose algo(s): 
     parser.add_argument(
         "-a",
         nargs="+",
@@ -570,12 +365,30 @@ def parse_args():
         help="Algorithm(s) to run. Default: all."
     )
     return parser.parse_args()
+
+
+
+
     
 if __name__ == "__main__":
+    all_algos = [
+        ("IForest", run_iforest, {"random_state":10}),
+        ("LOF",  run_lof, {}),
+        ("AE", run_autoencoder, {"random_state":10, "preprocessing": False,"epoch_num": 10}),
+        ("VAE", run_vae, {"random_state":10, "preprocessing": False,"epoch_num": 10}),
+        ("DeepSVDD", run_deepsvdd, {"random_state":10,"preprocessing": False,"epochs": 10}),
+        ("AE1SVM", run_ae1svm, {"preprocessing": False,"epochs": 10}),
+        ("KNN", run_knn, {"n_jobs":-1}), # Jobs in parallel
+        ("AnoGan", run_anogan, {"preprocessing": False,"epochs": 10})
+    ]
+
+    algo_names = [name.lower() for name, _, _ in all_algos]
     
-    args = parse_args()
+    args = parse_args(algo_names)
     datasets = load_datasets(args.d)
-    algorithms = get_algorithms(args.a)
+    algorithms = get_algorithms(all_algos, args.a)
+    mode = args.m
+    print("mode: ", mode)
+    
 
-
-    automatisation(datasets, algorithms)
+    automatisation(mode, datasets, algorithms)
