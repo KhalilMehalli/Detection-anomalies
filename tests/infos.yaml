@@ -1,0 +1,62 @@
+datasets_folder: "../data_rapport/"
+output_folder_checkpoints: "./checkpoints/"
+latex_output: "./latex_results.txt"
+algo_file: "python.algorithms" # file where all the algorithms are written 
+
+algorithms:
+  - name: IForest
+    runner: run_iforest
+    params:
+      random_state: 10
+
+  - name: IForest2
+    runner: run_iforest
+    params:
+      random_state: 10
+      n_estimators: 1000
+
+  - name: LOF
+    runner: run_lof
+    params: {}
+
+  - name: KNN
+    runner: run_knn
+    params:
+      n_jobs: -1
+
+  - name: AE
+    runner: run_autoencoder
+    params:
+      random_state: 10
+      preprocessing: false
+      epoch_num: 10
+
+  - name: VAE
+    runner: run_vae
+    params:
+      random_state: 10
+      preprocessing: false
+      epoch_num: 10
+
+  - name: AE1SVM
+    runner: run_ae1svm
+    params:
+      preprocessing: false
+      epochs: 10
+
+  - name: OCSVM
+    runner: run_ocsvm
+    params: {}
+
+  - name: DeepSVDD
+    runner: run_deepsvdd
+    params:
+      random_state: 10
+      preprocessing: false
+      epochs: 10
+
+  - name: AnoGan
+    runner: run_anogan
+    params:
+      preprocessing: false
+      epochs: 10

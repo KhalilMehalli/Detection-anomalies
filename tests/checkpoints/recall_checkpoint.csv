@@ -1,4 +1,2 @@
-dataset,IForest,LOF
-speech,0.00,0.00
-cancerS,0.90,0.90
-satellite,0.84,0.32
+cancerS,1.00
+shuttle,0.99

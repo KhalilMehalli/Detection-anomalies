@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 
 from python.algorithms import *
-from python.creation import list_all_file_name_in_folder,csv_data_into_bunch, create_checkpoint_csv, append_dict_to_csv, create_checkpoint_csv2
+from python.creation import list_all_file_name_in_folder,csv_data_into_bunch, create_checkpoint_csv, append_dict_to_csv, create_checkpoint_csv2, load_variables_from_yaml
 
 
 from sklearn.metrics import roc_curve, auc, recall_score, roc_auc_score
@@ -16,7 +16,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.utils import Bunch
 
 
-def benchmark_dataset_algo(datasets, algorithms, auc_csv="./checkpoints/auc_checkpoint.csv", recall_csv="./checkpoints/recall_checkpoint.csv",time_csv="./checkpoints/time_checkpoint.csv"):
+def benchmark_dataset_algo(datasets, algorithms, output_folder_checkpoints):
     """
     Run a benchmark of multiple algorithms on multiple datasets with checkpoints in csv.
     Apply all algorithms to each dataset in turn 
@@ -44,7 +44,7 @@ def benchmark_dataset_algo(datasets, algorithms, auc_csv="./checkpoints/auc_chec
         Execution time (seconds) for each (dataset × algorithm).
     """
 
-    create_checkpoint_csv(algorithms, auc_csv, recall_csv,time_csv) ### <- <-
+    create_checkpoint_csv(algorithms, output_folder_checkpoints) ### <- <-
     
     auc_list, recall_list, time_list = [], [], []
     
@@ -67,9 +67,9 @@ def benchmark_dataset_algo(datasets, algorithms, auc_csv="./checkpoints/auc_chec
         recall_list.append(recall_info)
         time_list.append(time_info)
 
-        append_dict_to_csv(auc_info,auc_csv) ### <- <-
-        append_dict_to_csv(recall_info,recall_csv)
-        append_dict_to_csv(time_info,time_csv)
+        append_dict_to_csv(auc_info,os.path.join(output_folder_checkpoints,"auc_checkpoint.csv")) 
+        append_dict_to_csv(recall_info,os.path.join(output_folder_checkpoints,"recall_checkpoint.csv"))
+        append_dict_to_csv(time_info,os.path.join(output_folder_checkpoints,"time_checkpoint.csv"))
            
         print(bunch.name, " : fini")
 
@@ -79,8 +79,7 @@ def benchmark_dataset_algo(datasets, algorithms, auc_csv="./checkpoints/auc_chec
     
     return df_auc, df_recall, df_time
 
-def benchmark_algo_dataset(datasets, algorithms, auc_csv="./checkpoints/auc_checkpoint.csv", recall_csv="./checkpoints/recall_checkpoint.csv",
-              time_csv="./checkpoints/time_checkpoint.csv"):
+def benchmark_algo_dataset(datasets, algorithms, output_folder_checkpoints):
     """
     Run a benchmark of multiple algorithms on multiple datasets.
     Apply all datasets to each algorithm in turn.
@@ -107,7 +106,7 @@ def benchmark_algo_dataset(datasets, algorithms, auc_csv="./checkpoints/auc_chec
         Execution time (seconds) for each (dataset × algorithm).
     """
 
-    create_checkpoint_csv2(datasets, auc_csv, recall_csv, time_csv)
+    create_checkpoint_csv2(datasets, output_folder_checkpoints)
     auc_list, recall_list, time_list = [], [], []
     
     for algo_name, algo_runner, params in algorithms:
@@ -131,9 +130,9 @@ def benchmark_algo_dataset(datasets, algorithms, auc_csv="./checkpoints/auc_chec
         time_list.append(time_info)
         print(algo_name, " : fini")
 
-        append_dict_to_csv(auc_info,auc_csv) 
-        append_dict_to_csv(recall_info,recall_csv)
-        append_dict_to_csv(time_info,time_csv)
+        append_dict_to_csv(auc_info,os.path.join(output_folder_checkpoints,"auc_checkpoint.csv")) 
+        append_dict_to_csv(recall_info,os.path.join(output_folder_checkpoints,"recall_checkpoint.csv"))
+        append_dict_to_csv(time_info,os.path.join(output_folder_checkpoints,"time_checkpoint.csv"))
         
     df_auc    = pd.DataFrame(auc_list)
     df_recall = pd.DataFrame(recall_list)
@@ -169,6 +168,49 @@ def pandas_to_latex(df_auc, df_recall, df_time):
     latex_time = add_hlines(df_time.to_latex(index=False,float_format="%.2f"))
 
     return latex_auc, latex_recall, latex_time
+    
+def pandas_to_latex_with_ranks(df, ascending):
+    """
+    Convert a df to latex, adding per-row rankings and bolding the top value.
+
+    Parameters
+    ----------
+    df : pandas 
+    ascending : bool
+        If True, rank 1 = smallest value; if False, rank 1 = largest value.
+
+    Returns
+    -------
+    str
+    """
+    # Identify numeric columns to rank, and preserve all others
+    num_cols = df.select_dtypes(include="number").columns
+    other_cols = [c for c in df.columns if c not in num_cols]
+
+    # Round values to two decimals 
+    vals = df[num_cols].round(2)
+
+    # Per row ranks, direction controlled by ascending
+    ranks = vals.rank(axis=1, method='dense', ascending=ascending).astype(int)
+
+    # Cconvert to strings, because the result will go in this dataset 
+    vals = vals.astype(str)
+
+    # Combine each value with its rank, bolding n.1 
+    for idx in df.index:
+        for col in num_cols:
+            v = vals.at[idx, col]
+            r = ranks.at[idx, col]
+            
+            if r == 1: 
+                cell = f"\\textbf{{{v}}} ({r})"
+            else:
+                cell = f"{v} ({r})"
+            vals.at[idx, col] = cell
+
+    df_final = pd.concat([df[other_cols], vals], axis=1)
+    
+    return add_hlines(df_final.to_latex(index=False, float_format="%.2f"))
 
 
 def write_latex_in_file(latex_auc, latex_recall,latex_time, algorithms, filepath = "./latex_results.txt"):
@@ -228,7 +270,7 @@ def write_latex_in_file(latex_auc, latex_recall,latex_time, algorithms, filepath
 
 
 
-def automatisation(mode, datasets, algorithms, filepath = "./latex_results.txt"):   
+def automatisation(mode, datasets, algorithms, filepath = "./latex_results.txt", output_folder_checkpoints="./checkpoints/"):   
     """
     Run the full pipeline: benchmark algorithms, convert results to LaTeX, and write to file.
 
@@ -242,17 +284,20 @@ def automatisation(mode, datasets, algorithms, filepath = "./latex_results.txt")
         Path where the LaTeX output will be written (default "./latex_results.txt").
 
     """
-    print("DÉBUT")
+    print("DÉBUT, ", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    print(algorithms)
     start = time.perf_counter()
 
     # Calculate all the metrics
     if mode == "da":
-        df_auc, df_recall, df_time = benchmark_dataset_algo(datasets, algorithms)
+        df_auc, df_recall, df_time = benchmark_dataset_algo(datasets, algorithms, output_folder_checkpoints)
     else:
-       df_auc, df_recall, df_time = benchmark_algo_dataset(datasets, algorithms) 
+       df_auc, df_recall, df_time = benchmark_algo_dataset(datasets, algorithms, output_folder_checkpoints) 
 
     # Transform the metrics into latex tab 
-    latex_auc, latex_recall, latex_time = pandas_to_latex(df_auc, df_recall, df_time)
+    latex_auc = pandas_to_latex_with_ranks(df_auc, False)
+    latex_recall = pandas_to_latex_with_ranks(df_recall, False)
+    latex_time = pandas_to_latex_with_ranks(df_time, True)
 
     # Write these latex tab in a file
     write_latex_in_file(latex_auc, latex_recall,latex_time, algorithms, filepath)
@@ -261,7 +306,7 @@ def automatisation(mode, datasets, algorithms, filepath = "./latex_results.txt")
     print("FIN apres ", elapsed, "secondes !!!")
 
 
-def load_datasets(names=None):
+def load_datasets(dataset_folder_path,names=None):
     """
     Load only the requested datasets into memory as lists of unch objects.
 
@@ -277,7 +322,7 @@ def load_datasets(names=None):
         Each bunch has attributes .name, .data, .target.
     """
     
-    all_files = list_all_file_name_in_folder()
+    all_files = list_all_file_name_in_folder(dataset_folder_path)
     if names:
         # Keep only the datasets whose  appears in the provided names list.
         selected_files = [f for f in all_files 
@@ -296,7 +341,7 @@ def get_algorithms(all_algos, selected=None):
 
     Parameters
     ----------
-    selected : list of str or None
+    selected : list of str or None 
         If provided, contains the algorithm names 
         to include. If None, all supported algorithms are returned.
         
@@ -318,7 +363,7 @@ def get_algorithms(all_algos, selected=None):
     return all_algos
 
 
-def parse_args(algo_names):
+def parse_args(algo_names,dataset_folder_path):
     """
     Parse command-line arguments to select datasets and algorithms.
 
@@ -329,7 +374,7 @@ def parse_args(algo_names):
         - algo:    list of chosen algorithm names (or None)
     """
     
-    ds_names = [os.path.splitext(os.path.basename(p))[0] for p in list_all_file_name_in_folder()]
+    ds_names = [os.path.splitext(os.path.basename(p))[0] for p in list_all_file_name_in_folder(dataset_folder_path)]
     
     parser = argparse.ArgumentParser(description="Benchmark script for multiple anomaly detection algorithms")
 
@@ -371,24 +416,16 @@ def parse_args(algo_names):
 
     
 if __name__ == "__main__":
-    all_algos = [
-        ("IForest", run_iforest, {"random_state":10}),
-        ("LOF",  run_lof, {}),
-        ("AE", run_autoencoder, {"random_state":10, "preprocessing": False,"epoch_num": 10}),
-        ("VAE", run_vae, {"random_state":10, "preprocessing": False,"epoch_num": 10}),
-        ("DeepSVDD", run_deepsvdd, {"random_state":10,"preprocessing": False,"epochs": 10}),
-        ("AE1SVM", run_ae1svm, {"preprocessing": False,"epochs": 10}),
-        ("KNN", run_knn, {"n_jobs":-1}), # Jobs in parallel
-        ("AnoGan", run_anogan, {"preprocessing": False,"epochs": 10})
-    ]
+    dataset_folder_path, output_folder_checkpoints, latex_output, all_algos = load_variables_from_yaml()
+    
 
     algo_names = [name.lower() for name, _, _ in all_algos]
     
-    args = parse_args(algo_names)
-    datasets = load_datasets(args.d)
+    args = parse_args(algo_names, dataset_folder_path)
+    datasets = load_datasets(dataset_folder_path, args.d)
     algorithms = get_algorithms(all_algos, args.a)
     mode = args.m
     print("mode: ", mode)
     
 
-    automatisation(mode, datasets, algorithms)
+    automatisation(mode, datasets, algorithms, latex_output, output_folder_checkpoints)

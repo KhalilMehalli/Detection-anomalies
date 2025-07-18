@@ -1,28 +1,48 @@
-Datasets used : ['../data_rapport/speech.csv', '../data_rapport/cancerS.csv', '../data_rapport/donneurs.csv', '../data_rapport/satellite.csv', '../data_rapport/fraude.csv', '../data_rapport/cancer du sein.csv', '../data_rapport/http.csv', '../data_rapport/shuttle.csv']
-Algortihms used : {'knn', 'ae'}
-DÉBUT
-speech  : départ
-   AE : départ
-Training:   0%|          | 0/10 [00:00<?, ?it/s]Training:  10%|█         | 1/10 [00:00<00:03,  2.88it/s]Training:  20%|██        | 2/10 [00:00<00:02,  2.99it/s]Training:  30%|███       | 3/10 [00:00<00:02,  3.09it/s]Training:  40%|████      | 4/10 [00:01<00:02,  2.33it/s]Training:  50%|█████     | 5/10 [00:01<00:01,  2.54it/s]Training:  60%|██████    | 6/10 [00:02<00:01,  2.68it/s]Training:  70%|███████   | 7/10 [00:02<00:01,  2.77it/s]Training:  80%|████████  | 8/10 [00:02<00:00,  2.91it/s]Training:  90%|█████████ | 9/10 [00:03<00:00,  2.94it/s]Training: 100%|██████████| 10/10 [00:03<00:00,  2.93it/s]Training: 100%|██████████| 10/10 [00:03<00:00,  2.81it/s]
-Total execution time 6.441703009000776
-AUC : 0.469856416054268 RAPPEL : 0.13114754098360656 TEMPS : 6.344253019000462
-   AE : fini
-   KNN : départ
-Total execution time 21.731338026998856
-AUC : 0.4912334652345958 RAPPEL : 0.11475409836065574 TEMPS : 11.108915664997767
-   KNN : fini
-speech  : fini
-cancerS  : départ
-   AE : départ
-Training:   0%|          | 0/10 [00:00<?, ?it/s]Training:  30%|███       | 3/10 [00:00<00:00, 22.76it/s]Training:  60%|██████    | 6/10 [00:00<00:00, 20.48it/s]Training:  90%|█████████ | 9/10 [00:00<00:00, 23.89it/s]Training: 100%|██████████| 10/10 [00:00<00:00, 23.34it/s]
-Total execution time 0.4651494760000787
-AUC : 0.9274509803921569 RAPPEL : 0.7 TEMPS : 0.45265982699856977
-   AE : fini
-   KNN : départ
-Total execution time 0.0862526839991915
-AUC : 0.9781512605042016 RAPPEL : 1.0 TEMPS : 0.05365563599843881
-   KNN : fini
-cancerS  : fini
-donneurs  : départ
-   AE : départ
-Training:   0%|          | 0/10 [00:00<?, ?it/s]
+Datasets used : ['../data_rapport/http.csv']
+All algorithms used
+mode:  da
+DÉBUT,  2025-07-18 09:27:10
+[('IForest', <function run_iforest at 0x7cb43b428d60>, {'random_state': 10}), ('LOF', <function run_lof at 0x7cb401ebe3e0>, {}), ('KNN', <function run_knn at 0x7cb400b65bc0>, {'n_jobs': -1}), ('AE', <function run_autoencoder at 0x7cb401ebccc0>, {'random_state': 10, 'preprocessing': False, 'epoch_num': 10}), ('VAE', <function run_vae at 0x7cb400b654e0>, {'random_state': 10, 'preprocessing': False, 'epoch_num': 10}), ('AE1SVM', <function run_ae1svm at 0x7cb400b65b20>, {'preprocessing': False, 'epochs': 10}), ('OCSVM', <function run_ocsvm at 0x7cb400b65d00>, {}), ('DeepSVDD', <function run_deepsvdd at 0x7cb400b65a80>, {'random_state': 10, 'preprocessing': False, 'epochs': 10}), ('AnoGan', <function run_anogan at 0x7cb400b65c60>, {'preprocessing': False, 'epochs': 10})]
+http  : départ
+   IForest : départ
+fit + predict fini
+[[562621  56425]
+ [   158    894]]
+              precision    recall  f1-score   support
+
+         0.0       1.00      0.91      0.95    619046
+         1.0       0.02      0.85      0.03      1052
+
+    accuracy                           0.91    620098
+   macro avg       0.51      0.88      0.49    620098
+weighted avg       1.00      0.91      0.95    620098
+
+précision 0.015596922486435563
+Total execution time 4.554994662000354
+AUC : 0.966497339110619 RAPPEL : 0.8498098859315589 TEMPS : 2.2977981920003003
+   IForest : fini
+   LOF : départ
+Datasets used : ['../data_rapport/http.csv']
+All algorithms used
+mode:  da
+DÉBUT,  2025-07-18 09:27:34
+[('IForest', <function run_iforest at 0x7f7fbf8d0d60>, {'random_state': 10}), ('LOF', <function run_lof at 0x7f7f863ba3e0>, {}), ('KNN', <function run_knn at 0x7f7f8500dbc0>, {'n_jobs': -1}), ('AE', <function run_autoencoder at 0x7f7f863b8cc0>, {'random_state': 10, 'preprocessing': False, 'epoch_num': 10}), ('VAE', <function run_vae at 0x7f7f8500d4e0>, {'random_state': 10, 'preprocessing': False, 'epoch_num': 10}), ('AE1SVM', <function run_ae1svm at 0x7f7f8500db20>, {'preprocessing': False, 'epochs': 10}), ('OCSVM', <function run_ocsvm at 0x7f7f8500dd00>, {}), ('DeepSVDD', <function run_deepsvdd at 0x7f7f8500da80>, {'random_state': 10, 'preprocessing': False, 'epochs': 10}), ('AnoGan', <function run_anogan at 0x7f7f8500dc60>, {'preprocessing': False, 'epochs': 10})]
+http  : départ
+   IForest : départ
+fit + predict fini
+[[562621  56425]
+ [   158    894]]
+              precision    recall  f1-score   support
+
+         0.0       1.00      0.91      0.95    619046
+         1.0       0.02      0.85      0.03      1052
+
+    accuracy                           0.91    620098
+   macro avg       0.51      0.88      0.49    620098
+weighted avg       1.00      0.91      0.95    620098
+
+précision 0.015596922486435563
+Total execution time 4.950060685999688
+AUC : 0.966497339110619 RAPPEL : 0.8498098859315589 TEMPS : 2.6568436329998804
+   IForest : fini
+   LOF : départ

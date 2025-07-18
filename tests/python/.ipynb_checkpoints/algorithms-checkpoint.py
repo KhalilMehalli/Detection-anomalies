@@ -1,5 +1,5 @@
 import time
-from sklearn.metrics import roc_curve, auc, recall_score, roc_auc_score
+from sklearn.metrics import roc_curve, auc, recall_score, roc_auc_score, precision_score, confusion_matrix, classification_report
 
 from sklearn.ensemble import IsolationForest
 from sklearn.neighbors import LocalOutlierFactor
@@ -9,6 +9,7 @@ from pyod.models.ae1svm import AE1SVM
 from pyod.models.knn import KNN
 from pyod.models.auto_encoder import AutoEncoder
 from pyod.models.anogan import AnoGAN
+from pyod.models.ocsvm import OCSVM
 
 
 
@@ -47,6 +48,11 @@ def run_iforest(bunch, params):
     # Binairisation of the prediction and scores calculation 
     y_pred = (y_pred == -1)
     scores = -IF.decision_function(x)
+
+    print(confusion_matrix(y_ground_truth, y_pred))
+    print(classification_report(y_ground_truth, y_pred), sep="\n")
+    print("précision", precision_score(y_ground_truth, y_pred))
+
 
     # metrics
     auc = roc_auc_score(y_ground_truth, scores)
@@ -94,6 +100,11 @@ def run_lof(bunch, params) :
     elapsed = time.perf_counter() - start
 
     print("fit + predict fini")	
+
+    print(confusion_matrix(y_ground_truth, y_pred))
+    print(classification_report(y_ground_truth, y_pred), sep="\n")
+    print("précision", precision_score(y_ground_truth, y_pred))
+
     # Binairisation of the prediction and scores calculation 
     y_pred = (y_pred == -1)
     scores = -LOF.negative_outlier_factor_
@@ -143,6 +154,11 @@ def run_autoencoder(bunch, params):
     elapsed = time.perf_counter() - start
 
     print("fit + predict fini")	
+
+    print(confusion_matrix(y_ground_truth, y_pred))
+    print(classification_report(y_ground_truth, y_pred), sep="\n")
+    print("précision", precision_score(y_ground_truth, y_pred))
+
     scores = AE.decision_function(x)
 
     auc = roc_auc_score(y_ground_truth, scores)
@@ -169,6 +185,11 @@ def run_vae(bunch, params):
 
     print("fit + predict fini")	
     # metrics
+
+    print(confusion_matrix(y_ground_truth, y_pred))
+    print(classification_report(y_ground_truth, y_pred), sep="\n")
+    print("précision", precision_score(y_ground_truth, y_pred))
+
     scores = VAE_model.decision_function(x)
     
     auc = roc_auc_score(y_ground_truth, scores)
@@ -202,6 +223,11 @@ def run_deepsvdd(bunch, params):
 
     print("fit + predict fini")	
     # metrics 
+
+    print(confusion_matrix(y_ground_truth, y_pred))
+    print(classification_report(y_ground_truth, y_pred), sep="\n")
+    print("précision", precision_score(y_ground_truth, y_pred))
+
     scores = DS.decision_function(x)
     
     auc = roc_auc_score(y_ground_truth, scores)
@@ -229,6 +255,11 @@ def run_ae1svm(bunch, params):
 
     print("fit + predict fini")	
     # metrics
+
+    print(confusion_matrix(y_ground_truth, y_pred))
+    print(classification_report(y_ground_truth, y_pred), sep="\n")
+    print("précision", precision_score(y_ground_truth, y_pred))
+
     scores = AE1SVM_model.decision_function(x)
     
     auc = roc_auc_score(y_ground_truth, scores)
@@ -259,7 +290,11 @@ def run_knn(bunch, params):
     
     auc = roc_auc_score(y_ground_truth, scores)
     recall = recall_score(y_ground_truth, y_pred)
-
+    
+    print(confusion_matrix(y_ground_truth, y_pred))
+    print(classification_report(y_ground_truth, y_pred), sep="\n")
+    print("précision", precision_score(y_ground_truth, y_pred))
+    
     total_time = time.perf_counter() - start
     print("Total execution time", total_time)
     
@@ -283,6 +318,10 @@ def run_anogan(bunch, params):
     # metrics
     scores = AG.decision_function(x)
 
+    print(confusion_matrix(y_ground_truth, y_pred))
+    print(classification_report(y_ground_truth, y_pred), sep="\n")
+    print("précision", precision_score(y_ground_truth, y_pred))
+
     auc    = roc_auc_score(y_ground_truth, scores)
     recall = recall_score(y_ground_truth, y_pred)
 
@@ -295,4 +334,34 @@ def run_anogan(bunch, params):
         'time':   elapsed
     }
 
+def run_ocsvm(bunch, params):
+    x, y_ground_truth = bunch.data, bunch.target
+    OC = OCSVM(**params)
+
+    # Fit + predict
+    start = time.perf_counter()
+    OC.fit(x)
+    y_pred = OC.predict(x)
+    elapsed = time.perf_counter() - start
+    
+    print("fit + predict fini")	
+    # metrics
+
+    print(confusion_matrix(y_ground_truth, y_pred))
+    print(classification_report(y_ground_truth, y_pred), sep="\n")
+    print("précision", precision_score(y_ground_truth, y_pred))
+
+    scores = OC.decision_function(x)
+
+    auc    = roc_auc_score(y_ground_truth, scores)
+    recall = recall_score(y_ground_truth, y_pred)
+
+    total_time = time.perf_counter() - start
+    print("Total execution time", total_time)
+    
+    return {
+        'auc':    auc,
+        'recall': recall,
+        'time':   elapsed
+    }
 
